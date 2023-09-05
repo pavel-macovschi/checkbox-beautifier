@@ -1,0 +1,10 @@
+{
+  "name": "checkbox-beautifier",
+  "version": "1.0.0",
+  "description": "Add custom css styles to input checkboxes to make it unique and beautiful to match you own web design.",
+  "keywords": ["form", "input", "checkbox", "style", "css"],
+  "main": "checkbox_beautifier.js",
+  "repository": "git@github.com:pavel-mk/checkbox-beautifier.git",
+  "author": "Pavel Macovschi <macovschi.pavel@gmail.com>",
+  "license": "MIT"
+}
