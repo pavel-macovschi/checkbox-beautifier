@@ -125,19 +125,16 @@ export default class Square {
 
             // Apply styles for outer placeholder element.
             outerPlaceholderElement.style.display = 'flex';
-            outerPlaceholderElement.style.position = 'relative';
             outerPlaceholderElement.style.padding = `${this.getProperty('paddedSpace')}`;
             outerPlaceholderElement.style.textAlign = 'center';
             outerPlaceholderElement.style.border = `${this.getProperty('border')}`;
             outerPlaceholderElement.style.transition = `${this.getProperty('transition')}`;
             outerPlaceholderElement.style.borderRadius = `${borderRadius}`;
             outerPlaceholderElement.style.boxShadow = `${this.getProperty('shadow')}`;
-            outerPlaceholderElement.style.margin = '0 0.3rem 0 0';
+            outerPlaceholderElement.style.margin = '0 0.4rem 0 0';
             outerPlaceholderElement.style.order = -1;
 
             // Apply styles for inner placeholder element.
-            innerPlaceholderElement.style.display = 'flex';
-            innerPlaceholderElement.style.position = 'relative';
             innerPlaceholderElement.style.transition = `${this.getProperty('transition')}`;
             innerPlaceholderElement.style.borderRadius = `${borderRadius}`;
             innerPlaceholderElement.style.width = `${this.getProperty('size')}`;
