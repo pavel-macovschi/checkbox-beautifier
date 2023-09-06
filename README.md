@@ -18,34 +18,42 @@
 #### Initialization with default properties.
 
 ```html
-<form>
-    <!-- Input is placed inside label -->
-    <label>
-        Banana
-        <input type="checkbox" name="fruits[]" value="banana" class="checkbox-beautify-square">
-    </label>
 
-    <!-- If you want to use label separately -->
-    <label for="bar">Mango</label>
-    <input id="bar" type="checkbox" name="fruits[]" value="mango" class="checkbox-beautify-square">
+<form>
+  <!-- Input is placed inside label -->
+  <label>
+    Banana
+    <input type="checkbox" name="fruits[]" value="banana" class="checkbox-beautify-square">
+  </label>
+
+  <!-- If you want to use label separately -->
+  <label for="bar">Mango</label>
+  <input id="bar" type="checkbox" name="fruits[]" value="mango" class="checkbox-beautify-square">
 </form>
 ```
 
 ##### If you are not going to use bundler like webpack just put a script tag with a module type at the bottom of html page.
 
 ```html
-<script type="module">
-    import CheckboxBeautifier from './modules/checkbox_beautifier.js';
 
-    // Initialization with default properties.
-    CheckboxBeautifier.create('Square');
+<script type="module">
+  
+  import CheckboxBeautifier from './src';
+
+  // Initialization with default properties.
+  CheckboxBeautifier.create('Square');
 </script>
 ```
 
-##### Webpack usage.
+### Add a package using yarn package manager.
+```yarn
+$   yarn add checkbox-beautifier
+``` 
+
+##### Webpack bundler usage and import.
 
 ```js
-import CheckboxBeautifier from './modules/checkbox_beautifier';
+import CheckboxBeautifier from "checkbox-beautifier";
 
 // Initialization with default properties.
 CheckboxBeautifier.create('Square');
@@ -53,11 +61,14 @@ CheckboxBeautifier.create('Square');
 
 ### Initialization with custom properties.
 
-```js
-import CheckboxBeautifier from './modules/checkbox_beautifier.js';
+```html
 
-// Initialization with custom properties.
-CheckboxBeautifier.create('Square', {
+<script type="module">
+
+  import CheckboxBeautifier from './src';
+
+  // Initialization with custom properties.
+  CheckboxBeautifier.create('Square', {
     colorChecked: 'brown',
     colorUnchecked: 'lightgrey',
     border: '1px solid brown',
@@ -68,9 +79,8 @@ CheckboxBeautifier.create('Square', {
     selector: '.my-custom-selector',
     shadow: '0 0 4px rgba(0, 200, 0, 0.4)',
     transition: 'all 0.6s ease'
-});
-
-
+  });
+</script>
 ```
 
 `properties` is an object literal with the following properties:
@@ -104,36 +114,44 @@ to `.checkbox-beautify-square`.
 
 ### You need to provide a master checkbox which will be triggerred all children (slave) checkboxes.
 
-```js
-import CheckboxBeautifier from './modules/checkbox_beautifier.js';
+```html
 
-CheckboxBeautifier.create('Square', { areGrouped: true });
+<script type="module">
+  
+  import CheckboxBeautifier from './src';
+
+  CheckboxBeautifier.create('Square', {
+      areGrouped: true
+  });
+  
+</script>
 ```
 
 ### All you need to do just include .checkbox-beautify--master class for a master checkbox and .checkbox-beautify--slave class for slave checkboxes.
 
 ```html
-<form>
-    <!-- Master checkbox -->
-    <label>
-        Select all colors
-        <input type="checkbox" class="checkbox-beautify-square checkbox-beautify--master">
-    </label>
 
-    <!-- Slave checkbox -->
-    <label>
-        Orange
-        <input type="checkbox" name="colors[]" value="orange" class="checkbox-beautify-square checkbox-beautify--slave">
-    </label>
-    <!-- Slave checkbox -->
-    <label>
-        Brown
-        <input type="checkbox" name="colors[]" value="brown" class="checkbox-beautify-square checkbox-beautify--slave">
-    </label>
-    <!-- Slave checkbox -->
-    <label>
-        Black
-        <input type="checkbox" name="colors[]" value="black" class="checkbox-beautify-square checkbox-beautify--slave">
-    </label>
+<form>
+  <!-- Master checkbox -->
+  <label>
+    Select all colors
+    <input type="checkbox" class="checkbox-beautify-square checkbox-beautify--master">
+  </label>
+
+  <!-- Slave checkbox -->
+  <label>
+    Orange
+    <input type="checkbox" name="colors[]" value="orange" class="checkbox-beautify-square checkbox-beautify--slave">
+  </label>
+  <!-- Slave checkbox -->
+  <label>
+    Brown
+    <input type="checkbox" name="colors[]" value="brown" class="checkbox-beautify-square checkbox-beautify--slave">
+  </label>
+  <!-- Slave checkbox -->
+  <label>
+    Black
+    <input type="checkbox" name="colors[]" value="black" class="checkbox-beautify-square checkbox-beautify--slave">
+  </label>
 </form>
 ```
