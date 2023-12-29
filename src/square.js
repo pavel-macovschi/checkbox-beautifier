@@ -203,7 +203,6 @@ export default class Square {
 
         for (const slaveInputElement of slaveInputElements) {
             // Set toggle handler on master checkbox itself.
-            // input.toggleAttribute('checked');
             const placeholderElement = slaveInputElement.nextElementSibling.children.item(0);
 
             // If master checkbox is set add select all slave checkboxes.

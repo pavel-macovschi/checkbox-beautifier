@@ -4,7 +4,7 @@
 
 ## Add custom css styles to input checkboxes to make it unique and beautiful to match you own web design.
 
-## It is written in pure javascript and completely CSS free, without dependencies.
+## It is written in pure javascript and completely CSS free, without extra dependencies.
 
 #### Browser's compatibility:
 
@@ -32,7 +32,7 @@
 </form>
 ```
 
-##### If you are not going to use bundler like webpack just put a script tag with a module type at the bottom of html page.
+##### If you are not going to use a bundler like a webpack just put a script tag with a module type at the bottom of html page.
 
 ```html
 
@@ -45,7 +45,7 @@
 </script>
 ```
 
-### Add a package using yarn package manager.
+### Add a package using the yarn package manager.
 ```yarn
 $   yarn add checkbox-beautifier
 ``` 
@@ -112,7 +112,7 @@ to `.checkbox-beautify-square`.
 
 ## If you need to use a group of checkboxes.
 
-### You need to provide a master checkbox which will be triggerred all children (slave) checkboxes.
+### Use areGrouped property and set its value to true.
 
 ```html
 
@@ -127,7 +127,7 @@ to `.checkbox-beautify-square`.
 </script>
 ```
 
-### All you need to do just include .checkbox-beautify--master class for a master checkbox and .checkbox-beautify--slave class for slave checkboxes.
+### Add .checkbox-beautify--master class for a master input checkbox and .checkbox-beautify--slave class for slave input checkboxes.
 
 ```html
 
