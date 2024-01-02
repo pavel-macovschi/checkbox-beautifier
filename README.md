@@ -36,7 +36,7 @@
 
 <script type="module">
   
-  import CheckboxBeautifier from './src/index.js';
+  import CheckboxBeautifier from './src';
 
   // Initialization with default properties.
   CheckboxBeautifier.create('Square');
@@ -63,7 +63,7 @@ CheckboxBeautifier.create('Square');
 
 <script type="module">
 
-  import CheckboxBeautifier from './src/index.js';
+  import CheckboxBeautifier from './src';
 
   // Initialization with custom properties.
   CheckboxBeautifier.create('Square', {
@@ -116,7 +116,7 @@ to `.checkbox-beautify-square`.
 
 <script type="module">
   
-  import CheckboxBeautifier from './src/index.js';
+  import CheckboxBeautifier from './src';
 
   CheckboxBeautifier.create('Square', {
       areGrouped: true

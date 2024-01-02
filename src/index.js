@@ -1,7 +1,7 @@
 import Square from "./square.js";
 
 export default class CheckboxBeautifier {
-    static VERSION = '1.0.3';
+    static VERSION = '1.0.4';
     static allowableInstances = ['Square'];
 
     static getFormattedInstancesNames() {
