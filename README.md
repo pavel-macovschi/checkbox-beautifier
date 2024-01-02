@@ -1,7 +1,5 @@
 # Checkbox Beautifier
 
-## Version 1.0
-
 ## Add custom css styles to input checkboxes to make it unique and beautiful to match you own web design.
 
 ## It is written in pure javascript and completely CSS free, without extra dependencies.
@@ -38,7 +36,7 @@
 
 <script type="module">
   
-  import CheckboxBeautifier from './src';
+  import CheckboxBeautifier from './src/index.js';
 
   // Initialization with default properties.
   CheckboxBeautifier.create('Square');
@@ -65,7 +63,7 @@ CheckboxBeautifier.create('Square');
 
 <script type="module">
 
-  import CheckboxBeautifier from './src';
+  import CheckboxBeautifier from './src/index.js';
 
   // Initialization with custom properties.
   CheckboxBeautifier.create('Square', {
@@ -118,7 +116,7 @@ to `.checkbox-beautify-square`.
 
 <script type="module">
   
-  import CheckboxBeautifier from './src';
+  import CheckboxBeautifier from './src/index.js';
 
   CheckboxBeautifier.create('Square', {
       areGrouped: true

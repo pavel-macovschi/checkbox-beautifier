@@ -1,17 +1,17 @@
 import Square from "./square.js";
 
 export default class CheckboxBeautifier {
-    static VERSION = '1.0.1';
+    static VERSION = '1.0.3';
     static allowableInstances = ['Square'];
 
     static getFormattedInstancesNames() {
         return CheckboxBeautifier.allowableInstances.map(v => v + '()').join(', ');
     }
 
-    static create(type, customProperties) {
+    static create(type, options) {
         switch (type) {
             case 'Square':
-                return new Square(customProperties);
+                return new Square(options);
             default:
                 throw new Error(`
                     Cannot create instance of: ${type}(), 
