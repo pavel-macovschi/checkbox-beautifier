@@ -13,7 +13,7 @@
 
 ## Square checkbox type.
 
-#### Initialization with default properties.
+#### Initialization with default options.
 
 ```html
 
@@ -38,7 +38,7 @@
   
   import CheckboxBeautifier from './src';
 
-  // Initialization with default properties.
+  // Initialization with default options.
   CheckboxBeautifier.create('Square');
 </script>
 ```
@@ -53,11 +53,11 @@ $   yarn add checkbox-beautifier
 ```js
 import CheckboxBeautifier from "checkbox-beautifier";
 
-// Initialization with default properties.
+// Initialization with default options.
 CheckboxBeautifier.create('Square');
 ```
 
-### Initialization with custom properties.
+### Initialization with custom options.
 
 ```html
 
@@ -65,7 +65,7 @@ CheckboxBeautifier.create('Square');
 
   import CheckboxBeautifier from './src';
 
-  // Initialization with custom properties.
+  // Initialization with custom options.
   CheckboxBeautifier.create('Square', {
     colorChecked: 'brown',
     colorUnchecked: 'lightgrey',
@@ -81,7 +81,7 @@ CheckboxBeautifier.create('Square');
 </script>
 ```
 
-`properties` is an object literal with the following properties:
+`options` is an object literal with the following options:
 
 - `colorChecked` — Matches checked state of input checkbox, you can apply naming colors like green, red, etc. or hex,
   hsla, rgba `black` or `rgba(0,0,0,1)`. Default value is set to `black` color
@@ -101,9 +101,11 @@ CheckboxBeautifier.create('Square');
 
 - `shadow` — Add shadow from the outer box, If you want shadow to be disabled just set value to `none`. Default value is
   set to `0 0 4px rgba(0, 0, 0, 0.5)`
+  
+- `transition` — Added css transition property between checked/unchecked states. Default value is set
+  to `all 0.4s`
 
-- `transition` — Added css transition effect between checked/unchecked states. Default value is set
-  to `all ease-out 0.2s`
+- `animated` — Enable or disable transition effect. Default value is set to `false`
 
 - `selector` — If you want to use custom selector, set value to `.your-custom-selector`. Default value is set 
 to `.checkbox-beautify-square`.
