@@ -46,9 +46,9 @@ export default class Slider extends Base {
         boxElement = document.createElement('span'),
         handleElement = document.createElement('span'),
         boxHeight = parseInt(this.getProperty('boxHeight')),
-        handleSize = parseInt(this.getHandleSize()), 
+        handleSize = parseInt(this.getHandleSize()),
         handleElementStyleTop = handleSize < boxHeight ? (boxHeight - handleSize) / 2 : 0
-      
+
       // Apply styles for outer placeholder element.
       boxElement.style.display = 'block'
       boxElement.style.position = 'relative'
