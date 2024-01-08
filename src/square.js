@@ -16,7 +16,6 @@ export default class Square extends Base {
     transition: 'all 0.4s',
     selector: '.checkbox-beautify-square',
     areGrouped: false,
-    animated: false
   }
 
   constructor (options) {
@@ -28,44 +27,28 @@ export default class Square extends Base {
       this.slaveInputElements = Array.from(this.inputElements).filter(el => el.classList.contains('checkbox-beautify--slave'))
 
       if (0 === this.slaveInputElements.length) {
-        throw new Error('Using group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class')
+        throw new Error('Using group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class.')
       }
     }
 
     this.init()
   }
 
-  /**
-   * Reset vendor's style.
-   */
-  hideDefaultStyle (input) {
-    const parent = input.parentElement
-
-    if ('LABEL' === parent.nodeName) {
-      Square.addLabelStyle(parent)
-    }
-
-    input.style.appearance = 'none'
-    input.style.margin = 0
-    input.style.padding = 0
-  }
-
   init () {
     for (const input of this.inputElements) {
-      this.hideDefaultStyle(input)
+      this.hideVendorStyle(input)
 
       const
         outerPlaceholder = document.createElement('span'),
         innerPlaceholder = document.createElement('span'),
-        borderRadius = parseInt(this.getProperty('borderRadius')) < 6 ? this.getProperty('borderRadius') : '6px',
-        transition = this.getProperty('animated') ? this.getProperty('transition') : '';
+        borderRadius = parseInt(this.getProperty('borderRadius')) < 6 ? this.getProperty('borderRadius') : '6px'
 
       // Apply styles for outer placeholder element.
       outerPlaceholder.style.display = 'flex'
       outerPlaceholder.style.padding = this.getProperty('paddedSpace')
       outerPlaceholder.style.textAlign = 'center'
       outerPlaceholder.style.border = this.getProperty('border')
-      outerPlaceholder.style.transition = transition
+      outerPlaceholder.style.transition = this.getProperty('transition')
       outerPlaceholder.style.borderRadius = borderRadius
       outerPlaceholder.style.boxShadow = this.getProperty('shadow')
       outerPlaceholder.style.margin = '0 0.4rem 0 0'
@@ -73,7 +56,7 @@ export default class Square extends Base {
       outerPlaceholder.classList.add('checkbox-beautify-placeholder-outer')
 
       // Apply styles for inner placeholder element.
-      innerPlaceholder.style.transition = transition
+      innerPlaceholder.style.transition = this.getProperty('transition')
       innerPlaceholder.style.borderRadius = borderRadius
       innerPlaceholder.style.width = this.getProperty('size')
       innerPlaceholder.style.height = this.getProperty('size')
@@ -103,7 +86,7 @@ export default class Square extends Base {
         // Normalize line height for labels to be used apart.
         labelElement.style.lineHeight = `${lineHeight}px`
 
-        Square.addLabelStyle(labelElement)
+        Base.addLabelStyle(labelElement)
       }
 
       this.statePropertiesHandler(input, innerPlaceholder)
@@ -146,12 +129,6 @@ export default class Square extends Base {
     } else {
       placeholder.style.backgroundColor = this.getProperty('colorUnchecked')
     }
-  }
-
-  static addLabelStyle (input) {
-    input.style.display = 'inline-flex'
-    input.style.cursor = 'pointer'
-    input.style.userSelect = 'none'
   }
 
 }

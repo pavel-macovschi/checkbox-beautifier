@@ -1,4 +1,5 @@
 export default class Base {
+
   /**
    * Set custom options.
    */
@@ -11,9 +12,9 @@ export default class Base {
   }
 
   /**
-   * Returns formatted object keys.
+   * Returns formatted object options.
    */
-  getFormattedObjectKeys () {
+  getOptions () {
     return Object
       .keys(this._options)
       .toString()
@@ -26,7 +27,7 @@ export default class Base {
    */
   getProperty (key) {
     if (typeof this._options[key] === 'undefined') {
-      throw new Error(`Cannot find an option [${key}], use one of these: ${this.getFormattedObjectKeys()}`)
+      throw new Error(`Cannot find an option [${key}], use one of these: ${this.getOptions()}`)
     }
 
     return this._options[key]
@@ -48,5 +49,28 @@ export default class Base {
     }
 
     return nodes
+  }
+
+  /**
+   * Reset vendor's style.
+   */
+  hideVendorStyle (input) {
+    const parent = input.parentElement
+
+    if ('LABEL' === parent.nodeName) {
+      Base.addLabelStyle(parent)
+    }
+
+    input.style.appearance = 'none'
+    input.style.display = 'none'
+    input.style.opacity = 0
+    input.style.margin = 0
+    input.style.padding = 0
+  }
+
+  static addLabelStyle (element) {
+    element.style.display = 'inline-flex'
+    element.style.cursor = 'pointer'
+    element.style.userSelect = 'none'
   }
 }

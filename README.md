@@ -38,8 +38,12 @@
   
   import CheckboxBeautifier from './src';
 
-  // Initialization with default options.
+  // Initialization Square type with default options.
   CheckboxBeautifier.create('Square');
+  
+  // Initialization Slider type with default options.
+  CheckboxBeautifier.create('Slider');
+  
 </script>
 ```
 
@@ -53,8 +57,12 @@ $   yarn add checkbox-beautifier
 ```js
 import CheckboxBeautifier from "checkbox-beautifier";
 
-// Initialization with default options.
+// Initialization Square type with default options.
 CheckboxBeautifier.create('Square');
+
+// Initialization Slider type with default options.
+CheckboxBeautifier.create('Slider');
+
 ```
 
 ### Initialization with custom options.
@@ -81,7 +89,7 @@ CheckboxBeautifier.create('Square');
 </script>
 ```
 
-`options` is an object literal with the following options:
+### Square checkbox type `options` is an object literal with the following options:
 
 - `colorChecked` — Matches checked state of input checkbox, you can apply naming colors like green, red, etc. or hex,
   hsla, rgba `black` or `rgba(0,0,0,1)`. Default value is set to `black` color
@@ -96,23 +104,47 @@ CheckboxBeautifier.create('Square');
 - `borderRadius` — If you want to make checkbox corners to be rounded, default value is set to `1px`
 
 - `paddedSpace` — This property added space between outer border, it is not limited so mostly depends on a size of
-  checkbox and your design. Increase or decrease it cautiously by 1px and check how it looks. Default value is set
-  to `4px`
+  checkbox and your design. Increase or decrease it cautiously by 1px and check how it looks. Default value is set to `4px`
 
-- `shadow` — Add shadow from the outer box, If you want shadow to be disabled just set value to `none`. Default value is
-  set to `0 0 4px rgba(0, 0, 0, 0.5)`
+- `shadow` — Add shadow from the outer box, If you want shadow to be disabled just set value to `none`. Default value is set to `0 0 4px rgba(0, 0, 0, 0.5)`
   
-- `transition` — Added css transition property between checked/unchecked states. Default value is set
-  to `all 0.4s`
+- `transition` — Add css transition property between checked/unchecked states. Default value is set to `all 0.4s`
 
-- `animated` — Enable or disable transition effect. Default value is set to `false`
+- `selector` — If you want to use custom selector, set value to `.your-custom-selector`. Default value is set to `.checkbox-beautify-square` 
 
-- `selector` — If you want to use custom selector, set value to `.your-custom-selector`. Default value is set 
-to `.checkbox-beautify-square`.
+- `areGrouped` — If you need a group of checkboxes that will be handled with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be as slaves using css class. You can find out more in demo-slide.html file. 
+
+### Slider checkbox type `options` is an object literal with the following options:
+
+- `handleColorChecked` — Matches checked state of input checkbox, you can apply preferable css3 color value like hex, rgba, hsla or color naming green, red, etc. Default value is set to `white`
+  
+- `handleColorUnchecked` — Matches unchecked state of input checkbox, you can apply preferable css3 color value like hex, rgba, hsla or color naming green, red, etc. Default value is set to `lightblue`
+    
+- `boxColorChecked` — Matches checked state of input checkbox, you can apply preferable css3 color value like hex, rgba, hsla or color naming green, red, etc. Default value is set to `lightblue`
+
+- `boxColorUnchecked` — Matches checked state of input checkbox, you can apply preferable css3 color value like hex, rgba, hsla or color naming green, red, etc. Default value is set to `white`
+
+- `boxWidth` — Width size of a slider box. Default value is set to `80px`
+
+- `boxHeight` — Width size of a slider box. Default value is set to `30px`
+
+- `boxBorder` — Slider box border is a standard css border style. Default value is set to `1px solid rgba(0,0,0,.3)`
+
+- `handleSize` — Size of a slider' handle. Size value cannot be more than a boxHeight value. Default value is set to `30px`
+
+- `borderRadius` — Radius is applied for both handle and boxBorder. You can set different value to see an effect. For example to make slider without radius set value to `0` after it will be fully rectangle. Default value is set to `30px`
+
+- `transition` — Add css transition property between checked/unchecked states. Default value is set to `all 0.4s`
+
+- `selector` — If you want to use custom selector, set value to `.my-custom-selector`. Default value is set to `.checkbox-beautify-slider`
+
+- `shadow` — Add shadow from the outer box border, If you want shadow to be disabled just set value to `none`. Default value is set to `0 0 4px lightgray`
+
+- `areGrouped` — If you need a group of checkboxes that will be triggered with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be as slaves using css class. You can find out more in demo-slide.html file. 
 
 ## If you need to use a group of checkboxes.
 
-### Use areGrouped property and set its value to true.
+### Use areGrouped option and set its value to true.
 
 ```html
 
@@ -154,4 +186,20 @@ to `.checkbox-beautify-square`.
     <input type="checkbox" name="colors[]" value="black" class="checkbox-beautify-square checkbox-beautify--slave">
   </label>
 </form>
+```
+
+### Helper method `getOptions()`
+
+```html
+
+<script type="module">
+  
+  import CheckboxBeautifier from './src';
+
+  const square = CheckboxBeautifier.create('Square');
+  
+  // Returns all available options in a readable way.
+  square.getOptions(); 
+  
+</script>
 ```
