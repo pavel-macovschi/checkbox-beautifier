@@ -1,8 +1,8 @@
 # Checkbox Beautifier
 
-## Add custom css styles to input checkboxes to make it unique and beautiful to match you own web design.
+## Add custom css3 styles to form inputs with the checkbox type to make it unique and beautiful matching your custom web design style.
 
-## It is written in pure javascript and completely CSS free, without extra dependencies.
+## It is written in pure javascript and completely CSS free without extra dependencies.
 
 #### Browser's compatibility:
 
@@ -49,7 +49,7 @@
 
 ### Add a package using the yarn package manager.
 ```yarn
-$   yarn add checkbox-beautifier
+$ yarn add checkbox-beautifier
 ``` 
 
 ##### Webpack bundler usage and import.
