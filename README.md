@@ -1,6 +1,6 @@
 # Checkbox Beautifier
 
-## Add custom css3 styles to form inputs with the checkbox type to make it unique and beautiful matching your custom web design style.
+## Add custom css3 styles to form checkbox inputs to make it unique and beautiful matching your own web design.
 
 ## It is written in pure javascript and completely CSS free without extra dependencies.
 

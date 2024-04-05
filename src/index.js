@@ -2,8 +2,6 @@ import Square from './square.js';
 import Slider from './slider.js';
 
 export default class CheckboxBeautifier {
-  static VERSION = '1.1.1';
-
   static instancesMap = new Map([
     ['Square', Square],
     ['Slider', Slider],
@@ -17,7 +15,7 @@ export default class CheckboxBeautifier {
 
     if (!this.instancesMap.has(type)) {
       throw new Error(
-          `Cannot create instance of: ${type}(), use one of these names:  ${this.getObjectNames()}`);
+          `Cannot create instance of: ${type}(), use one of these types:  ${this.getObjectNames()}`);
     }
 
     const instance = this.instancesMap.get(type);
