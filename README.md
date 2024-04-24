@@ -38,11 +38,14 @@
   
   import CheckboxBeautifier from './src';
 
-  // Initialization Square type with default options.
+  // Initialization Square checkbox type with default options.
   CheckboxBeautifier.create('Square');
   
-  // Initialization Slider type with default options.
+  // Initialization Slider checkbox type with default options.
   CheckboxBeautifier.create('Slider');
+
+  // Initialization Classic checkbox type with default options.
+  CheckboxBeautifier.create('Classic');
   
 </script>
 ```
