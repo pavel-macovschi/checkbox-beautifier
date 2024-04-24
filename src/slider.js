@@ -31,7 +31,7 @@ export default class Slider extends Base {
 
       if (0 === this.slaveInputElements.length) {
         throw new Error(
-            'Using group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class.',
+            'To use a group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class.',
         );
       }
     }

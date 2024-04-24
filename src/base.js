@@ -54,7 +54,7 @@ export default class Base {
   }
 
   /**
-   * Reset vendor's style.
+   * Hide vendor's style.
    */
   hideVendorStyle(input) {
     const parent = input.parentElement;

@@ -15,7 +15,7 @@
 
 <body>
 
-    <form method="get" name="test" accept-charset="UTF-8">
+    <form name="test" accept-charset="UTF-8">
         <div class="grid">
 
             <!--  Initialization with default options -->
@@ -120,7 +120,7 @@
         CheckboxBeautifier.create('Slider', { selector: '.my-custom-selector' })
 
         // Initialization with custom options, using a group of checkboxes.
-        const slider = CheckboxBeautifier.create('Slider', {
+        CheckboxBeautifier.create('Slider', {
             handleColorUnchecked: 'rgba(196,151,114,0.6)',
             boxColorChecked: 'rgba(196,151,114,0.6)',
             boxWidth: '70px',
@@ -130,7 +130,6 @@
             areGrouped: true,
             shadow: 'none',
         })
-        
     </script>
 
 </body>

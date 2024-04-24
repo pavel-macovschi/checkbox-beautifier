@@ -1,10 +1,12 @@
 import Square from './square.js';
 import Slider from './slider.js';
+import Classic from './classic.js';
 
 export default class CheckboxBeautifier {
   static instancesMap = new Map([
     ['Square', Square],
     ['Slider', Slider],
+    ['Classic', Classic],
   ]);
 
   static getObjectNames() {

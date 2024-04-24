@@ -1,20 +1,21 @@
 import Base from './base.js';
 
-export default class Square extends Base {
+export default class Classic extends Base {
 
-  static type = 'Square';
+  static type = 'Classic';
 
   // Default options.
   _options = {
     border: '1px solid black',
-    colorChecked: 'black',
-    colorUnchecked: 'rgba(0, 0, 0, 0.2)',
+    checkmark: '2px solid black',
+    colorChecked: 'rgb(238,255,239)',
+    colorUnchecked: 'white',
     shadow: '0 0 4px rgba(0, 0, 0, 0.5)',
     borderRadius: '1px',
     size: '24px',
     paddedSpace: '4px',
     transition: 'all 0.4s',
-    selector: '.checkbox-beautify-square',
+    selector: '.checkbox-beautify-classic',
     areGrouped: false,
   };
 
@@ -45,10 +46,14 @@ export default class Square extends Base {
           innerPlaceholder = document.createElement('span'),
           borderRadius = parseInt(this.getProperty('borderRadius')) < 6 ?
               this.getProperty('borderRadius') :
-              '6px';
+              '6px',
+          calcInnerPlaceholderHeight = parseInt(this.getProperty('size')) / 3;
+      ;
 
       // Apply styles for outer placeholder element.
       outerPlaceholder.style.display = 'flex';
+      outerPlaceholder.style.width = this.getProperty('size');
+      outerPlaceholder.style.height = this.getProperty('size');
       outerPlaceholder.style.padding = this.getProperty('paddedSpace');
       outerPlaceholder.style.textAlign = 'center';
       outerPlaceholder.style.border = this.getProperty('border');
@@ -60,10 +65,17 @@ export default class Square extends Base {
       outerPlaceholder.classList.add('checkbox-beautify-placeholder-outer');
 
       // Apply styles for inner placeholder element.
-      innerPlaceholder.style.transition = this.getProperty('transition');
-      innerPlaceholder.style.borderRadius = borderRadius;
+      innerPlaceholder.style.position = 'relative';
+      innerPlaceholder.style.top = `${calcInnerPlaceholderHeight / 2}px`;
+      innerPlaceholder.style.opacity = 0;
       innerPlaceholder.style.width = this.getProperty('size');
-      innerPlaceholder.style.height = this.getProperty('size');
+      innerPlaceholder.style.height = `${calcInnerPlaceholderHeight}px`;
+      innerPlaceholder.style.border = this.getProperty('checkmark');
+      // Hide top and right borders.
+      innerPlaceholder.style.borderTop = 'none';
+      innerPlaceholder.style.borderRight = 'none';
+      innerPlaceholder.style.transform = 'rotate(-45deg)';
+      innerPlaceholder.style.transition = this.getProperty('transition');
       innerPlaceholder.classList.add('checkbox-beautify-placeholder-inner');
 
       // Append a child placeholder element.
@@ -103,12 +115,11 @@ export default class Square extends Base {
       }, false);
 
       // Remove dot prefix.
-      const selector = this.getProperty('selector').substr(1);
-
+      const selector = this.getProperty('selector').substring(1);
       // Handle master/slave input checkboxes.
       if (input.classList.contains(`${selector}`) &&
           input.classList.contains(`checkbox-beautify--master`)) {
-        input.addEventListener('click', (e) => this.handleMasterCheckbox(e));
+        input.addEventListener('click', e => this.handleMasterCheckbox(e));
       }
     }
   }
@@ -116,24 +127,32 @@ export default class Square extends Base {
   handleMasterCheckbox(e) {
     for (const input of this.slaveInputElements) {
       // Set toggle handler on master checkbox itself.
-      const placeholder = input.parentElement.querySelector(
+      const checkmark = input.parentElement.querySelector(
           '.checkbox-beautify-placeholder-inner');
       // If a master checkbox is checked select all slave checkboxes.
       if (e.target.checked) {
         input.checked = true;
-        placeholder.style.backgroundColor = this.getProperty('colorChecked');
+        checkmark.parentElement.style.backgroundColor = this.getProperty(
+            'colorChecked');
+        checkmark.style.opacity = 1;
       } else {
         input.checked = false;
-        placeholder.style.backgroundColor = this.getProperty('colorUnchecked');
+        checkmark.parentElement.style.backgroundColor = this.getProperty(
+            'colorUnchecked');
+        checkmark.style.opacity = 0;
       }
     }
   }
 
   statePropertiesHandler(input, placeholder) {
     if (input.checked) {
-      placeholder.style.backgroundColor = this.getProperty('colorChecked');
+      placeholder.parentElement.style.backgroundColor = this.getProperty(
+          'colorChecked');
+      placeholder.style.opacity = 1;
     } else {
-      placeholder.style.backgroundColor = this.getProperty('colorUnchecked');
+      placeholder.parentElement.style.backgroundColor = this.getProperty(
+          'colorUnchecked');
+      placeholder.style.opacity = 0;
     }
   }
 
