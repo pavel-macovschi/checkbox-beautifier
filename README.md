@@ -1,6 +1,6 @@
 # Checkbox Beautifier
 
-## Add custom css3 styles to form checkbox inputs to make it unique and beautiful matching your own web design.
+## Create unique input checkboxes of your form using css3 styles that will be matched your custom web design.
 
 ## It is written in pure javascript and completely CSS free without extra dependencies.
 
@@ -118,7 +118,7 @@ CheckboxBeautifier.create('Classic');
 
 - `selector` — If you want to use custom selector, set value to `.your-custom-selector`. Default value is set to `.checkbox-beautify-square` 
 
-- `areGrouped` — If you need a group of checkboxes that will be handled with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be as slaves using css class. You can find out more in demo-slide.html file. 
+- `areGrouped` — If you need a group of checkboxes that will be handled with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be slaves using css class. You can find out more in demo-square.html file. 
 
 ### Slider checkbox type `options` is an object literal with the following options:
 
@@ -146,7 +146,7 @@ CheckboxBeautifier.create('Classic');
 
 - `shadow` — Add shadow from the outer box border, If you want shadow to be disabled just set value to `none`. Default value is set to `0 0 4px lightgray`
 
-- `areGrouped` — If you need a group of checkboxes that will be triggered with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be as slaves using css class. You can find out more in demo-slide.html file. 
+- `areGrouped` — If you need a group of checkboxes that will be triggered with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be slaves using css class. You can find out more in demo-slide.html file. 
 
 
 ### Classic checkbox type `options` is an object literal with the following options:
@@ -174,7 +174,7 @@ CheckboxBeautifier.create('Classic');
 
 - `selector` — If you want to use custom selector, set value to `.your-custom-selector`. Default value is set to `.checkbox-beautify-classic`
 
-- `areGrouped` — If you need a group of checkboxes that will be handled with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be as slaves using css class. You can find out more in demo-slide.html file.
+- `areGrouped` — If you need a group of checkboxes that will be handled with a master checkbox. Default value is set to `false`. Also you need to specify which checkbox will be master and which are will be slaves using css class. You can find out more in demo-classic.html file.
 
 
 ## If you need to use a group of checkboxes.
@@ -233,7 +233,7 @@ CheckboxBeautifier.create('Classic');
 
   const square = CheckboxBeautifier.create('Square');
   
-  // Returns all available options in a readable way.
+  // Returns all possible checkbox options.
   square.getOptions(); 
   
 </script>
