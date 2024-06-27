@@ -10,14 +10,16 @@ export default class CheckboxBeautifier {
   ]);
 
   static getObjectNames() {
-    return Array.from(this.instancesMap.keys()).map(v => v + '()').join(', ');
+    return Array.from(this.instancesMap.keys()).map(v => v + '()').join(' | ');
   }
 
   static create(type, options) {
 
     if (!this.instancesMap.has(type)) {
-      throw new Error(
-          `Cannot create instance of: ${type}(), use one of these types:  ${this.getObjectNames()}`);
+      throw new Error(`
+        Cannot create instance of: ${type}(),
+        use one of these types: ${this.getObjectNames()}
+      `);
     }
 
     const instance = this.instancesMap.get(type);

@@ -1,136 +1,139 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Checkbox beautifier - Square type</title>
-    <style>
-        .grid { display: flex; }
-        .column { width: 30%; }
-        .field { margin-bottom: 0.6rem; }
-        .field-master-checkbox { margin: 0 -1.2rem 0.8rem; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Square Type</title>
+  <style>
+    .grid { display: flex; }
+    .column { width: 30%; }
+    .field { margin-bottom: 0.6rem; }
+    .field-master-checkbox { margin: 0 -1.2rem 0.8rem; }
+  </style>
 </head>
 
 <body>
 
-    <form name="test" accept-charset="UTF-8">
-        <div class="grid">
+  <form name="test" accept-charset="UTF-8">
+    <div class="grid">
 
-            <!--  Initialization with default options -->
-            <div class="column">
-                <h4>Fruits:</h4>
+      <!--  Initialization with default options -->
+      <div class="column">
+        <h4>Fruits:</h4>
 
-                <div class="field">
-                    <label>
-                        Mango
-                        <input type="checkbox" id="mango" name="fruits[]" value="mango" class="checkbox-beautify-square" checked>
-                    </label>
-                </div>
-
-                <div class="field">
-                    <label>
-                        Apple
-                        <input type="checkbox" name="fruits[]" value="apple" class="checkbox-beautify-square">
-                    </label>
-                </div>
-
-                <div class="field">
-                    <!-- If you want to use label apart -->
-                    <input id="bar" type="checkbox" name="fruits[]" value="banana" class="checkbox-beautify-square">
-                    <label for="bar">Banana</label>
-                </div>
-            </div>
-
-            <!--  Initialization with a custom selector -->
-            <div class="column">
-                <h4>Animals:</h4>
-
-                <div class="field">
-                    <label>
-                        Elephant
-                        <input type="checkbox" name="animals[]" value="elephant" class="my-checkbox-selector" checked>
-                    </label>
-                </div>
-
-                <div class="field">
-                    <label>
-                        Tiger
-                        <input type="checkbox" name="animals[]" value="tiger" class="my-checkbox-selector">
-                    </label>
-                </div>
-
-                <div class="field">
-                    <!-- If you want to use label apart -->
-                    <input id="foo" type="checkbox" name="animals[]" value="lion" class="my-checkbox-selector">
-                    <label for="foo">Lion</label>
-                </div>
-            </div>
-
-            <!--  Initialization with custom options using groups of checkboxes. -->
-            <div class="column">
-                <h4>Colors:</h4>
-
-                <div class="field-master-checkbox">
-                    <label>
-                        Select all colors
-                        <input type="checkbox" class="checkbox-beautify-square checkbox-beautify--master">
-                    </label>
-                </div>
-                <div class="field">
-                    <label>
-                        Orange
-                        <input type="checkbox" name="colors[]" value="orange" class="checkbox-beautify-square checkbox-beautify--slave">
-                    </label>
-                </div>
-                <div class="field">
-                    <label>
-                        Black
-                        <input type="checkbox" name="colors[]" value="black" class="checkbox-beautify-square checkbox-beautify--slave" checked>
-                    </label>
-                </div>
-                <div class="field">
-                    <!-- If you want to use label apart -->
-                    <label for="yellow">Yellow</label>
-                    <input id="yellow" type="checkbox" name="colors[]" value="yellow" class="checkbox-beautify-square checkbox-beautify--slave" checked>
-                </div>
-                <div class="field">
-                    <label>
-                        Green
-                        <input type="checkbox" name="colors[]" value="green" class="checkbox-beautify-square checkbox-beautify--slave">
-                    </label>
-                </div>
-            </div>
-
+        <div class="field">
+          <label>
+            Mango
+            <input type="checkbox" id="mango" name="fruits[]" value="mango" class="checkbox-beautify-square" checked>
+          </label>
         </div>
 
-        <button type="submit">Submit</button>
+        <div class="field">
+          <label>
+            Apple
+            <input type="checkbox" name="fruits[]" value="apple" class="checkbox-beautify-square">
+          </label>
+        </div>
 
-    </form>
+        <div class="field">
+          <!-- If you want to use label apart -->
+          <input id="bar" type="checkbox" name="fruits[]" value="banana" class="checkbox-beautify-square">
+          <label for="bar">Banana</label>
+        </div>
+      </div>
+
+      <!--  Initialization with a custom selector -->
+      <div class="column">
+        <h4>Animals:</h4>
+
+        <div class="field">
+          <label>
+            Elephant
+            <input type="checkbox" name="animals[]" value="elephant" class="my-selector" checked>
+          </label>
+        </div>
+
+        <div class="field">
+          <label>
+            Tiger
+            <input type="checkbox" name="animals[]" value="tiger" class="my-selector">
+          </label>
+        </div>
+
+        <div class="field">
+          <!-- If you want to use label apart -->
+          <input id="foo" type="checkbox" name="animals[]" value="lion" class="my-selector">
+          <label for="foo">Lion</label>
+        </div>
+      </div>
+
+      <!--  Initialization with custom options using groups of checkboxes -->
+      <div class="column">
+        <h4>Colors:</h4>
+
+        <div class="field-master-checkbox">
+          <label>
+            Select all colors
+            <input type="checkbox" class="checkbox-beautify-square checkbox-beautify--master">
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            Orange
+            <input type="checkbox" name="colors[]" value="orange"
+              class="checkbox-beautify-square checkbox-beautify--slave">
+          </label>
+        </div>
+        <div class="field">
+          <label>
+            Black
+            <input type="checkbox" name="colors[]" value="black"
+              class="checkbox-beautify-square checkbox-beautify--slave">
+          </label>
+        </div>
+        <div class="field">
+          <!-- If you want to use label apart -->
+          <label for="yellow">Yellow</label>
+          <input id="yellow" type="checkbox" name="colors[]" value="yellow"
+            class="checkbox-beautify-square checkbox-beautify--slave">
+        </div>
+        <div class="field">
+          <label>
+            Green
+            <input type="checkbox" name="colors[]" value="green"
+              class="checkbox-beautify-square checkbox-beautify--slave">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Submit</button>
+
+  </form>
 
 
-    <script type="module">
-        import CheckboxBeautifier from "./src"
+  <script type="module">
+    import CheckboxBeautifier from './src';
 
-        // Initialization with default options.
-        CheckboxBeautifier.create('Square')
+    // Init with default options.
+    CheckboxBeautifier.create('Square');
 
-        // Initialization with a custom selector.
-        CheckboxBeautifier.create('Square', { selector: '.my-checkbox-selector' })
+    // Init with a custom selector.
+    CheckboxBeautifier.create('Square', {selector: '.my-selector'});
 
-        // Initialization with custom options, using a group of checkboxes.
-        CheckboxBeautifier.create('Square', {
-            colorChecked: 'brown',
-            colorUnchecked: 'rgba(0,0,0,0.1)',
-            border: '1px solid black',
-            size: '30px',
-            paddedSpace: '4px',
-            animated: true,
-            shadow: 'none',
-            areGrouped: true
-        })
-    </script>
+    // Init with custom options, using a group of checkboxes.
+    CheckboxBeautifier.create('Square', {
+      colorChecked: 'brown',
+      colorUnchecked: 'rgba(0, 0, 0, 0.1)',
+      border: '1px solid black',
+      size: '30px',
+      paddedSpace: '4px',
+      shadow: 'none',
+      areGrouped: true,
+    });
+  </script>
 
 </body>
 

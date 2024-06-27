@@ -4,34 +4,20 @@ export default class Square extends Base {
 
   static type = 'Square';
 
-  // Default options.
-  _options = {
-    border: '1px solid black',
-    colorChecked: 'black',
-    colorUnchecked: 'rgba(0, 0, 0, 0.2)',
-    shadow: '0 0 4px rgba(0, 0, 0, 0.5)',
-    borderRadius: '1px',
-    size: '24px',
-    paddedSpace: '4px',
-    transition: 'all 0.4s',
-    selector: '.checkbox-beautify-square',
-    areGrouped: false,
-  };
-
   constructor(options) {
-    super();
-    this.setCustomOptions(options);
-    this.inputElements = this.getInputs();
-
-    if (this.getProperty('areGrouped')) {
-      this.slaveInputElements = Array.from(this.inputElements).
-          filter(el => el.classList.contains('checkbox-beautify--slave'));
-
-      if (0 === this.slaveInputElements.length) {
-        throw new Error(
-            'To use a group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class.');
-      }
-    }
+    super({
+      border: '1px solid black',
+      colorChecked: 'black',
+      colorUnchecked: 'rgba(0, 0, 0, 0.1)',
+      shadow: '0 0 4px rgba(0, 0, 0, 0.5)',
+      borderRadius: '1px',
+      size: '24px',
+      paddedSpace: '4px',
+      transition: 'all 0.4s',
+      selector: '.checkbox-beautify-square',
+      areGrouped: false,
+      labelSpace: '0.4rem',
+    }, options);
 
     this.init();
   }
@@ -41,100 +27,87 @@ export default class Square extends Base {
       this.hideVendorStyle(input);
 
       const
-          outerPlaceholder = document.createElement('span'),
-          innerPlaceholder = document.createElement('span'),
-          borderRadius = parseInt(this.getProperty('borderRadius')) < 6 ?
-              this.getProperty('borderRadius') :
-              '6px';
+          placeholderOuter = document.createElement('span'),
+          placeholderInner = document.createElement('span'),
+          borderRadius = parseInt(this.getOption('borderRadius')) < 6 ?
+              this.getOption('borderRadius') : '6px';
 
       // Apply styles for outer placeholder element.
-      outerPlaceholder.style.display = 'flex';
-      outerPlaceholder.style.padding = this.getProperty('paddedSpace');
-      outerPlaceholder.style.textAlign = 'center';
-      outerPlaceholder.style.border = this.getProperty('border');
-      outerPlaceholder.style.transition = this.getProperty('transition');
-      outerPlaceholder.style.borderRadius = borderRadius;
-      outerPlaceholder.style.boxShadow = this.getProperty('shadow');
-      outerPlaceholder.style.margin = '0 0.4rem 0 0';
-      outerPlaceholder.style.order = -1;
-      outerPlaceholder.classList.add('checkbox-beautify-placeholder-outer');
+      this.setStyles(placeholderOuter, {
+        display: 'flex',
+        padding: this.getOption('paddedSpace'),
+        textAlign: 'center',
+        border: this.getOption('border'),
+        transition: this.getOption('transition'),
+        borderRadius: borderRadius,
+        boxShadow: this.getOption('shadow'),
+        marginRight: this.getOption('labelSpace'),
+        order: -1,
+      });
 
       // Apply styles for inner placeholder element.
-      innerPlaceholder.style.transition = this.getProperty('transition');
-      innerPlaceholder.style.borderRadius = borderRadius;
-      innerPlaceholder.style.width = this.getProperty('size');
-      innerPlaceholder.style.height = this.getProperty('size');
-      innerPlaceholder.classList.add('checkbox-beautify-placeholder-inner');
+      this.setStyles(placeholderInner, {
+        display: 'inline-block',
+        width: this.getOption('size'),
+        height: this.getOption('size'),
+        transition: this.getOption('transition'),
+        borderRadius: borderRadius,
+      });
 
-      // Append a child placeholder element.
-      outerPlaceholder.appendChild(innerPlaceholder);
-      // Append a parent placeholder element.
+      // Add class for correct selection in a master handler.
+      placeholderInner.classList.add('checkbox-beautify-placeholder-inner');
+
+      // Append a child placeholder.
+      placeholderOuter.appendChild(placeholderInner);
+
+      // Append an outer placeholder to a parent element.
       const parent = input.parentElement;
-      parent.appendChild(outerPlaceholder);
+      parent.appendChild(placeholderOuter);
 
-      // Normalize line-height for label's children.
-      const
-          paddedSpace = parseInt(this.getProperty('paddedSpace')),
-          size = parseInt(this.getProperty('size')),
-          lineHeight = paddedSpace > 0 ? size + (paddedSpace * 2) : size;
+      this.lineHeightNormalizer(parent, input, placeholderOuter);
 
-      if ('LABEL' === parent.nodeName) {
-        parent.style.lineHeight = `${lineHeight}px`;
-      }
-
-      // Assuming that a target input element isn't placed inside label.
-      if ('LABEL' !== parent.nodeName) {
-        const labelElement = document.querySelector(`[for="${input.id}"]`);
-        labelElement.appendChild(outerPlaceholder);
-        labelElement.prepend(input);
-        // Normalize line height for labels to be used apart.
-        labelElement.style.lineHeight = `${lineHeight}px`;
-
-        Base.addLabelStyle(labelElement);
-      }
-
-      this.statePropertiesHandler(input, innerPlaceholder);
+      this.statePropertiesHandler(input, placeholderInner);
 
       // Add an event listener on a target input element.
       input.addEventListener('click', () => {
         input.toggleAttribute('checked');
 
-        this.statePropertiesHandler(input, innerPlaceholder);
-      }, false);
+        this.statePropertiesHandler(input, placeholderInner);
+      });
 
       // Remove dot prefix.
-      const selector = this.getProperty('selector').substr(1);
+      const selector = this.getOption('selector').substring(1);
 
       // Handle master/slave input checkboxes.
       if (input.classList.contains(`${selector}`) &&
           input.classList.contains(`checkbox-beautify--master`)) {
-        input.addEventListener('click', (e) => this.handleMasterCheckbox(e));
+        input.addEventListener('click', e => this.handleMasterCheckbox(e));
       }
     }
   }
 
   handleMasterCheckbox(e) {
-    for (const input of this.slaveInputElements) {
+    for (const input of this.slaveInputs) {
+
       // Set toggle handler on master checkbox itself.
       const placeholder = input.parentElement.querySelector(
           '.checkbox-beautify-placeholder-inner');
       // If a master checkbox is checked select all slave checkboxes.
       if (e.target.checked) {
         input.checked = true;
-        placeholder.style.backgroundColor = this.getProperty('colorChecked');
+        placeholder.style.backgroundColor = this.getOption('colorChecked');
       } else {
         input.checked = false;
-        placeholder.style.backgroundColor = this.getProperty('colorUnchecked');
+        placeholder.style.backgroundColor = this.getOption('colorUnchecked');
       }
     }
   }
 
   statePropertiesHandler(input, placeholder) {
     if (input.checked) {
-      placeholder.style.backgroundColor = this.getProperty('colorChecked');
+      placeholder.style.backgroundColor = this.getOption('colorChecked');
     } else {
-      placeholder.style.backgroundColor = this.getProperty('colorUnchecked');
+      placeholder.style.backgroundColor = this.getOption('colorUnchecked');
     }
   }
-
 }

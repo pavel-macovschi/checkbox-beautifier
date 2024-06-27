@@ -4,37 +4,23 @@ export default class Slider extends Base {
 
   static type = 'Slider';
 
-  _options = {
-    handleColorChecked: 'white',
-    handleColorUnchecked: 'lightblue',
-    boxColorChecked: 'lightblue',
-    boxColorUnchecked: 'white',
-    boxWidth: '80px',
-    boxHeight: '30px',
-    boxBorder: '1px solid rgba(0,0,0,.3)',
-    handleSize: '30px',
-    shadow: '0 0 4px lightgray',
-    borderRadius: '20px',
-    areGrouped: false,
-    transition: 'all 0.4s',
-    selector: '.checkbox-beautify-slider',
-  };
-
   constructor(options) {
-    super();
-    this.setCustomOptions(options);
-    this.inputElements = this.getInputs();
-
-    if (this.getProperty('areGrouped')) {
-      this.slaveInputElements = Array.from(this.inputElements).
-          filter(el => el.classList.contains('checkbox-beautify--slave'));
-
-      if (0 === this.slaveInputElements.length) {
-        throw new Error(
-            'To use a group of checkboxes you should indicate which checkboxes should be handled as slaves using [.checkbox-beautify--slave] class.',
-        );
-      }
-    }
+    super({
+      handleColorChecked: 'white',
+      handleColorUnchecked: 'lightblue',
+      boxColorChecked: 'lightblue',
+      boxColorUnchecked: 'white',
+      boxWidth: '80px',
+      boxHeight: '30px',
+      handleSize: '30px',
+      boxBorder: '1px solid rgba(0,0,0,.3)',
+      shadow: '0 0 4px lightgray',
+      borderRadius: '20px',
+      areGrouped: false,
+      transition: 'all 0.4s',
+      selector: '.checkbox-beautify-slider',
+      labelSpace: '0.4rem',
+    }, options);
 
     this.init();
   }
@@ -46,58 +32,50 @@ export default class Slider extends Base {
       const
           boxElement = document.createElement('span'),
           handleElement = document.createElement('span'),
-          boxHeight = parseInt(this.getProperty('boxHeight')),
+          boxHeight = parseInt(this.getOption('boxHeight')),
           handleSize = parseInt(this.getHandleSize()),
-          handleElementStyleTop = handleSize < boxHeight ?
+          handleCalcTopStyle = handleSize < boxHeight ?
               (boxHeight - handleSize) / 2 :
               0;
 
-      // Apply styles for outer placeholder element.
-      boxElement.style.display = 'block';
-      boxElement.style.position = 'relative';
-      boxElement.style.width = this.getProperty('boxWidth');
-      boxElement.style.height = this.getProperty('boxHeight');
-      boxElement.style.border = this.getProperty('boxBorder');
-      boxElement.style.borderRadius = this.getProperty('borderRadius');
-      boxElement.style.backgroundColor = this.getProperty('boxColorUnchecked');
-      boxElement.style.boxShadow = this.getProperty('shadow');
-      boxElement.style.transition = this.getProperty('transition');
-      boxElement.style.order = -1;
-      boxElement.style.marginRight = '6px';
       boxElement.classList.add('checkbox-beautify-placeholder-box');
 
+      // Apply styles for outer placeholder element.
+      this.setStyles(boxElement, {
+        display: 'block',
+        position: 'relative',
+        width: this.getOption('boxWidth'),
+        height: this.getOption('boxHeight'),
+        border: this.getOption('boxBorder'),
+        borderRadius: this.getOption('borderRadius'),
+        backgroundColor: this.getOption('boxColorUnchecked'),
+        boxShadow: this.getOption('shadow'),
+        transition: this.getOption('transition'),
+        order: -1,
+        marginRight: this.getOption('labelSpace'),
+      });
+
       // Apply styles for inner placeholder element.
-      handleElement.style.display = 'block';
-      handleElement.style.position = 'absolute';
-      handleElement.style.top = `${handleElementStyleTop}px`;
-      handleElement.style.left = 0;
-      handleElement.style.width = this.getHandleSize();
-      handleElement.style.height = this.getHandleSize();
-      handleElement.style.backgroundColor = this.getProperty(
-          'handleColorChecked');
-      handleElement.style.borderRadius = this.getProperty('borderRadius');
-      handleElement.style.transition = this.getProperty('transition');
+      this.setStyles(handleElement, {
+        display: 'block',
+        position: 'absolute',
+        top: `${handleCalcTopStyle}px`,
+        left: 0,
+        width: this.getHandleSize(),
+        height: this.getHandleSize(),
+        backgroundColor: this.getOption('handleColorChecked'),
+        borderRadius: this.getOption('borderRadius'),
+        transition: this.getOption('transition'),
+      });
 
       // Append a child placeholder element.
       boxElement.appendChild(handleElement);
+
       // Append a parent placeholder element.
       const parent = input.parentElement;
       parent.appendChild(boxElement);
 
-      // Set correct line height for label text.
-      if ('LABEL' === parent.nodeName) {
-        parent.style.lineHeight = this.getProperty('boxHeight');
-      }
-
-      // Assuming that a target input element is not placed inside a label.
-      if ('LABEL' !== parent.nodeName) {
-        const labelElement = document.querySelector([`[for="${input.id}"]`]);
-        labelElement.style.lineHeight = this.getProperty('boxHeight');
-        labelElement.appendChild(boxElement);
-        labelElement.prepend(input);
-
-        Base.addLabelStyle(labelElement);
-      }
+      this.labelNormalizer(parent, input, boxElement);
 
       // Default state properties.
       this.statePropertiesHandler(input, handleElement, boxElement);
@@ -110,17 +88,17 @@ export default class Slider extends Base {
       }, false);
 
       // Handle master/slave input checkboxes.
-      const selector = this.getProperty('selector').substr(1);
+      const selector = this.getOption('selector').substring(1);
 
       if (input.classList.contains(selector) &&
           input.classList.contains('checkbox-beautify--master')) {
-        input.addEventListener('click', (e) => this.handleMasterCheckbox(e));
+        input.addEventListener('click', e => this.handleMasterCheckbox(e));
       }
     }
   }
 
   handleMasterCheckbox(e) {
-    for (const input of this.slaveInputElements) {
+    for (const input of this.slaveInputs) {
       const
           boxElement = input.parentElement.querySelector(
               '.checkbox-beautify-placeholder-box'),
@@ -132,18 +110,18 @@ export default class Slider extends Base {
     }
   }
 
-  statePropertiesHandler(inputElement, handleElement, boxElement) {
-    const left = (parseInt(this.getProperty('boxWidth')) -
+  statePropertiesHandler(input, handleElement, boxElement) {
+    const left = (parseInt(this.getOption('boxWidth')) -
         parseInt(this.getHandleSize())) + 'px';
 
-    if (inputElement.checked) {
-      boxElement.style.backgroundColor = this.getProperty('boxColorChecked');
-      handleElement.style.backgroundColor = this.getProperty(
+    if (input.checked) {
+      boxElement.style.backgroundColor = this.getOption('boxColorChecked');
+      handleElement.style.backgroundColor = this.getOption(
           'handleColorChecked');
       handleElement.style.left = left;
     } else {
-      boxElement.style.backgroundColor = this.getProperty('boxColorUnchecked');
-      handleElement.style.backgroundColor = this.getProperty(
+      boxElement.style.backgroundColor = this.getOption('boxColorUnchecked');
+      handleElement.style.backgroundColor = this.getOption(
           'handleColorUnchecked');
       handleElement.style.left = 0;
     }
@@ -151,9 +129,37 @@ export default class Slider extends Base {
 
   getHandleSize() {
     // Do not allow to make a handle size bigger than a box height.
-    return this.getProperty('handleSize') > this.getProperty('boxHeight') ?
-        this.getProperty('boxHeight') :
-        this.getProperty('handleSize');
+    const
+        handleSize = this.getOption('handleSize'),
+        boxHeight = this.getOption('boxHeight')
+    ;
+
+    return handleSize > boxHeight ? boxHeight : handleSize;
+  }
+
+  labelNormalizer(parent, input, boxElement) {
+    // Set correct line height for label text.
+    if ('LABEL' === parent.nodeName) {
+      parent.style.lineHeight = this.getOption('boxHeight');
+    }
+
+    // Assuming that a target input element is not placed inside a label.
+    if ('LABEL' !== parent.nodeName) {
+      const labelElement = document.querySelector([`[for="${input.id}"]`]);
+
+      if (!labelElement) {
+        throw new Error(`
+            Label element is not found for input with value: ${input.value},
+            add [id] attribute for it and [for] attribute for a parent label.
+          `);
+      }
+
+      labelElement.style.lineHeight = this.getOption('boxHeight');
+      labelElement.appendChild(boxElement);
+      labelElement.prepend(input);
+
+      Base.addLabelStyle(labelElement);
+    }
   }
 
 }
